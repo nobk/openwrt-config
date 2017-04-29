@@ -25,7 +25,9 @@ endef
 
 define Package/config-seed/install
 	$(INSTALL_DIR) $(1)/etc
-	$(INSTALL_DATA) $(TOPDIR)/.config $(1)/etc/config.seed
+	pushd $(TOPDIR)
+	$(SCRIPT_DIR)/diffconfig.sh > $(1)/etc/config.seed
+	popd
 endef
 
 $(eval $(call BuildPackage,config-seed))
