@@ -27,7 +27,7 @@ define Package/config-seed/install
 	rm -f $(PKG_BUILD_DIR)/.built*
 	$(INSTALL_DIR) $(1)/etc
 	cd $(TOPDIR) && $(SCRIPT_DIR)/diffconfig.sh > $(1)/etc/config.seed && cd -
-	tar -Jcf $(1)/etc/linux-config.xz $(BUILD_DIR)/linux-*/linux-4.*/.config
+	cd $(BUILD_DIR)/linux-*/linux-4.*/ && tar -Jcf $(1)/etc/linux-config.xz .config && cd -
 endef
 
 $(eval $(call BuildPackage,config-seed))
